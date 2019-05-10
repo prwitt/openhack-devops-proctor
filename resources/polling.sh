@@ -3,6 +3,7 @@
 declare -i duration=1
 declare hasUrl=""
 declare endpoint
+declare -i count=0
 
 usage() {
     cat <<END
@@ -64,6 +65,11 @@ while [[ true ]]; do
    if [ $status != "200" ]; then
       echo "Error identified during upgrade"
       exit 1
+   fi
+   count=$((count + 1))
+   if [[ $count = "30" ]]; then
+      echo "Finished succesfully"
+      exit 0
    fi
    sleep $duration
 done
