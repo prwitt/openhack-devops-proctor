@@ -60,6 +60,10 @@ while [[ true ]]; do
      echo "$timestamp | $status "
    else
      echo "$timestamp | $status | $endpoint " 
-   fi 
+   fi
+   if [ $status != "300" ]; then
+      echo "Error identified during upgrade"
+      exit 1
+   fi
    sleep $duration
 done
